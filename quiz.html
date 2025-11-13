@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTTP Quiz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f4f4f9; color: #222; }
+    header { background: #202938; color: #fff; padding: 16px; }
+    header h1 { margin: 0 0 8px 0; font-size: 20px; }
+    nav ul { list-style: none; padding: 0; margin: 0; display: flex; gap: 12px; }
+    nav a { color: #fff; text-decoration: none; font-size: 14px; padding: 4px 8px; border-radius: 4px; }
+    nav a:hover { background: #33415c; }
+    .container { max-width: 900px; margin: 24px auto; padding: 0 16px 32px 16px; }
+    form { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #ddd; }
+    .question { margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+    input[type=text] { width: 100%; max-width: 360px; padding: 6px; border-radius: 4px; border: 1px solid #ccc; }
+    .options label { display: block; margin-bottom: 4px; font-size: 14px; }
+    button { padding: 8px 14px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+    #submitBtn { background: #1f7a3f; color: #fff; margin-right: 8px; }
+    #resetBtn { background: #888; color: #fff; }
+    #results { margin-top: 18px; padding: 12px; background: #fff; border-radius: 8px; border: 1px solid #ddd; display: none; font-size: 14px; }
+    .pass { color: #1f7a3f; font-weight: bold; }
+    .fail { color: #c62828; font-weight: bold; }
+    .qResult { margin-top: 6px; padding: 6px; border-radius: 4px; }
+    .correct { background: #e3f4e8; }
+    .incorrect { background: #fde3e3; }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>HTTP Evolution Project</h1>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="history.html">HTTP History</a></li>
+      <li><a href="versions.html">HTTP Versions</a></li>
+      <li><a href="security.html">Security</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>HTTP Self Assessment Quiz</h2>
+  <p>Answer the questions and click Submit to see your score and feedback.</p>
+
+  <form id="quizForm">
+
+    <div class="question">
+      <p><strong>1. HTTP stands for what</strong></p>
+      <input type="text" id="q1">
+    </div>
+
+    <div class="question">
+      <p><strong>2. Which OSI layer does HTTP belong to</strong></p>
+      <div class="options">
+        <label><input type="radio" name="q2" value="a"> Physical layer</label>
+        <label><input type="radio" name="q2" value="b"> Network layer</label>
+        <label><input type="radio" name="q2" value="c"> Transport layer</label>
+        <label><input type="radio" name="q2" value="d"> Application layer</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p><strong>3. Which version made persistent connections the default</strong></p>
+      <div class="options">
+        <label><input type="radio" name="q3" value="a"> HTTP 0.9</label>
+        <label><input type="radio" name="q3" value="b"> HTTP 1.0</label>
+        <label><input type="radio" name="q3" value="c"> HTTP 1.1</label>
+        <label><input type="radio" name="q3" value="d"> HTTP 2</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p><strong>4. What is a key feature of HTTP 2</strong></p>
+      <div class="options">
+        <label><input type="radio" name="q4" value="a"> One request per connection</label>
+        <label><input type="radio" name="q4" value="b"> Binary framing and multiplexing</label>
+        <label><input type="radio" name="q4" value="c"> Removes HTTPS</label>
+        <label><input type="radio" name="q4" value="d"> Works at the physical layer</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p><strong>5. Which are benefits of HTTPS</strong></p>
+      <p>Select all that apply:</p>
+      <div class="options">
+        <label><input type="checkbox" name="q5" value="a"> Encryption</label>
+        <label><input type="checkbox" name="q5" value="b"> Authentication</label>
+        <label><input type="checkbox" name="q5" value="c"> Integrity checks</label>
+        <label><input type="checkbox" name="q5" value="d"> Zero latency</label>
+      </div>
+    </div>
+
+    <button id="submitBtn" type="button">Submit</button>
+    <button id="resetBtn" type="button">Reset</button>
+
+  </form>
+
+  <div id="results"></div>
+</div>
+
+<script>
+  const form = document.getElementById("quizForm");
+  const results = document.getElementById("results");
+
+  document.getElementById("submitBtn").onclick = () => {
+    let score = 0;
+    let output = "";
+
+    const q1 = document.getElementById("q1").value.trim().toLowerCase();
+    const q1Correct = q1 === "hypertext transfer protocol";
+    if (q1Correct) score++;
+    output += build(1, q1Correct, "Hypertext Transfer Protocol");
+
+    const q2 = document.querySelector('input[name="q2"]:checked');
+    const q2Correct = q2 && q2.value === "d";
+    if (q2Correct) score++;
+    output += build(2, q2Correct, "Application layer");
+
+    const q3 = document.querySelector('input[name="q3"]:checked');
+    const q3Correct = q3 && q3.value === "c";
+    if (q3Correct) score++;
+    output += build(3, q3Correct, "HTTP 1.1");
+
+    const q4 = document.querySelector('input[name="q4"]:checked');
+    const q4Correct = q4 && q4.value === "b";
+    if (q4Correct) score++;
+    output += build(4, q4Correct, "Binary framing and multiplexing");
+
+    const q5Checked = Array.from(document.querySelectorAll('input[name="q5"]:checked')).map(x => x.value);
+    const q5Correct = ["a","b","c"].every(v => q5Checked.includes(v)) && q5Checked.length === 3;
+    if (q5Correct) score++;
+    output += build(5, q5Correct, "Encryption, authentication, integrity");
+
+    const pass = score >= 4;
+    results.style.display = "block";
+    results.innerHTML = `<div class="overall ${pass ? 'pass' : 'fail'}">${pass ? 'Pass' : 'Fail'}</div><div>Score ${score}/5</div>${output}`;
+  };
+
+  function build(num, correct, answer) {
+    return `<div class="qResult ${correct ? 'correct' : 'incorrect'}">Question ${num} ${correct ? 'Correct' : 'Incorrect'}  Correct answer  ${answer}</div>`;
+  }
+
+  document.getElementById("resetBtn").onclick = () => {
+    form.reset();
+    results.style.display = "none";
+    results.innerHTML = "";
+  };
+</script>
+
+</body>
+</html>
