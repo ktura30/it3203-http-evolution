@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTTP Versions</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<header class="site-header">
+  <h1>HTTP Versions</h1>
+</header>
+
+<div id="menuToggle">Menu</div>
+
+<nav class="site-nav">
+  <a href="index.html">Home</a>
+  <a href="history.html">History</a>
+  <a href="versions.html">HTTP Versions</a>
+  <a href="security.html">HTTPS & Security</a>
+  <a href="concepts.html">Key Concepts</a>
+  <a href="references.html">References</a>
+  <a href="about.html">About</a>
+</nav>
+
+<main class="container">
+  <h2>HTTP 0.9</h2>
+  <p>Simple, one-line protocol. Only returned HTML files using the GET method.</p>
+
+  <h2>HTTP 1.0</h2>
+  <ul>
+    <li>Added request and response headers</li>
+    <li>Supported different content types</li>
+    <li>Opened a new TCP connection for each request</li>
+  </ul>
+
+  <h2>HTTP 1.1</h2>
+  <ul>
+    <li>Persistent connections by default</li>
+    <li>Improved caching</li>
+    <li>Host header required to support many sites on one server</li>
+    <li>Supported pipelining to reduce delays</li>
+  </ul>
+
+  <h2>HTTP 2</h2>
+  <ul>
+    <li>Introduced binary framing</li>
+    <li>Multiplexing supports many streams on one connection</li>
+    <li>Header compression reduces overhead</li>
+    <li>Greatly improves speed on modern websites</li>
+  </ul>
+
+  <h2>HTTP 3</h2>
+  <ul>
+    <li>Uses QUIC instead of TCP</li>
+    <li>Faster recovery from packet loss</li>
+    <li>Built for mobile networks and unstable connections</li>
+    <li>Becoming widely adopted by major platforms</li>
+  </ul>
+
+</main>
+
+<footer>
+  <p>Class project for IT 3203 Web Development at Kennesaw State University</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
